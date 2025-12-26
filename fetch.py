@@ -3,6 +3,7 @@ import json
 import pandas as pd
 from typing import List, Dict, Any, Optional
 import time
+from copilot import AzureOpenAIChatClient
 
 # ============================
 # API Endpoints
@@ -320,69 +321,60 @@ def pipeline(disease_name: str, max_targets: int = 5, max_drugs_per_target: int 
     
     return pd.DataFrame(all_data)
 
-# ============================
-# Example Usage & Discussion
-# ============================
 
-def collect_large_dataset(diseases: List[str], max_targets: int = 50, max_drugs_per_target: int = 10, 
-                         output_file: str = "ic50_large_dataset.csv") -> pd.DataFrame:
-    all_dataframes = []
-    total_records = 0
-    
-    for i, disease in enumerate(diseases, 1):
-        
-        try:
-            df = pipeline(disease, max_targets=max_targets, max_drugs_per_target=max_drugs_per_target)
-            
-            if not df.empty:
-                all_dataframes.append(df)
-                total_records += len(df)
-                if all_dataframes:
-                    temp_df = pd.concat(all_dataframes, ignore_index=True)
-                    temp_df.to_csv(output_file, index=False)
-            else:
-                print(f"\n⚠ No IC50 data collected for {disease}")
-                
-        except Exception as e:
-            if all_dataframes:
-                temp_df = pd.concat(all_dataframes, ignore_index=True)
-                temp_df.to_csv(output_file, index=False)
-            continue
-    
-    if all_dataframes:
-        final_df = pd.concat(all_dataframes, ignore_index=True)
-        return final_df
-    else:
-        return pd.DataFrame()
-    
+diseases = [
+    "breast cancer",
+    "prostate cancer",
+    "lung cancer",
+    "colorectal cancer",
+    "diabetes type 2",
+    "hypertension",
+    "alzheimer disease"
+]
+copilot=AzureOpenAIChatClient()
 
+disease_c=copilot.generate_desease_name_from_prompt("i have breast cancer and diabetes type 2")
+diseases=json.loads(disease_c)["desease"]
 
-def main():
-    diseases = [
-        "breast cancer",
-        "prostate cancer",
-        "lung cancer",
-        "colorectal cancer",
-        "diabetes type 2",
-        "hypertension",
-        "alzheimer disease"
-    ]
-    
-    df = collect_large_dataset(diseases, max_targets=50, max_drugs_per_target=10, 
-                              output_file="ic50_large_dataset.csv")
+def get_data(diseases):
+    for disease_name in diseases:
+        efo_ids = map_disease_to_efo(disease_name)
+        print(f"Disease: {disease_name} → EFO IDs: {efo_ids}")
+        if not efo_ids:
+            print(f"No EFO ID found for disease: {disease_name}")
+        for i in efo_ids:
+            targets = get_associated_targets(i, max_targets=50)
+            all_data = []
+            for i, target in enumerate(targets):
+                drugs = get_known_drugs_for_target(target["target_id"], max_drugs=10)
+                if len(drugs)==0:
+                    continue
+                for j, drug in enumerate(drugs):
+                    ic50_data = get_ic50_data_for_molecule(drug["drug_id"], limit=100)
+                    features = get_molecule_properties(drug["drug_id"])
+                    for ic50 in ic50_data:
+                        row = {
+                            # Disease information
+                            "disease_name": disease_name,
+                            "efo_id": i,
+                            
+                            # Target information
+                            "target_id": target["target_id"],
+                            "target_symbol": target["approved_symbol"],
+                            "association_score": target["association_score"],
+                            
+                            # Drug information
+                            "drug_id": drug["drug_id"],
+                            "drug_name": drug["pref_name"],
+                            "clinical_phase": drug["phase"],
+                            
+                            # IC50 bioactivity data
+                            "ic50_value": ic50["standard_value"],
+                            "ic50_units": ic50["standard_units"],
+                            "target_chembl_id": ic50["target_chembl_id"],
+                            "assay_chembl_id": ic50["assay_chembl_id"],
+                            "pchembl_value": ic50["pchembl_value"]
+                        }
+                        return row
 
-    if df.empty:
-        return
-
-    display_cols = ['disease_name', 'target_symbol', 'drug_name', 'ic50_value', 'ic50_units', 'pchembl_value']
-    available_cols = [col for col in display_cols if col in df.columns]
-
-    # Save to CSV
-    output_file = "ic50_large_dataset.csv"
-    df.to_csv(output_file, index=False)
-
-    target_counts = df.groupby(['target_symbol', 'target_id']).size().sort_values(ascending=False).head(10)
-
-    drug_counts = df.groupby(['drug_name', 'drug_id']).size().sort_values(ascending=False).head(10)
-if __name__ == "__main__":
-    main()
+print(get_data(diseases))

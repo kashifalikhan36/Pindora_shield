@@ -2,6 +2,8 @@ import os
 import base64
 from openai import AzureOpenAI
 import json
+from dotenv import load_dotenv
+load_dotenv()
 
 class AzureOpenAIChatClient:
     def __init__(self, 
@@ -9,10 +11,10 @@ class AzureOpenAIChatClient:
                  deployment_name: str = None,
                  api_key: str = None,
                  api_version: str = None):
-        
-        self.azure_endpoint = azure_endpoint or os.getenv("ENDPOINT_URL", "https://cvflow-us-ai-resource.openai.azure.com/")
-        self.deployment_name = deployment_name or os.getenv("DEPLOYMENT_NAME", "gpt-5-chat")
-        self.api_key = api_key or os.getenv("AZURE_OPENAI_API_KEY")
+        # Use os.environ.get to fetch environment variables, do not fallback to hardcoded sensitive values
+        self.azure_endpoint = azure_endpoint or os.environ.get("ENDPOINT_URL")
+        self.deployment_name = deployment_name or os.environ.get("DEPLOYMENT_NAME")
+        self.api_key = api_key or os.environ.get("AZURE_OPENAI_API_KEY")
         self.api_version = api_version or "2025-01-01-preview"
 
         self.client = AzureOpenAI(
@@ -20,32 +22,85 @@ class AzureOpenAIChatClient:
             api_key=self.api_key,
             api_version=self.api_version
         )
-    def generate_desease(self, user_text: str, file_path: str = None) -> str:
+    def generate_desease_name_from_prompt(self, user_text: str) -> str:
         self.system_prompt = {
             "role": "system",
-            "content": """Forget about the previous instruction, Now you are going to work as a Desease finder, for that i'll give you the desease name directly some times or maybe i'll explain you the syptoms of the person based on that you have to give me one correct desease which is possible taht the person ahve and then give that desease name name under 1 or 2 words only, and yeah gave me only json foremrt answers like this:- {"Desease":"coronavirus"}"""
+            "content": """
+Forget about the previous instructions, Now you are a Disease Name Resolver for biomedical APIs.
+
+Your task:
+- You will receive user input that may contain:
+  - Symptoms
+  - One disease name
+  - Multiple disease names
+  - Or a combination of symptoms and disease names
+- Based on the input, identify the most accurate and standardized disease name(s)
+  that are compatible with api.platform.opentargets.org (EFO-compatible).
+
+Rules you MUST follow:
+1. Always return disease names that resolve correctly on api.platform.opentargets.org.
+2. Use standardized clinical disease names aligned with EFO / Open Targets ontology.
+3. Infer diseases from symptoms only when explicit disease names are not provided.
+4. Return multiple diseases only when the input clearly indicates more than one condition.
+5. Do NOT include explanations, reasoning, comments, or extra text.
+6. Output MUST be valid JSON only.
+7. The JSON key must be exactly "desease" (keep this spelling).
+8. The value must be an array of one or more disease name strings.
+9. Do NOT include duplicates, abbreviations, or non-disease terms.
+10. Use lowercase disease names unless capitalization is required by convention.
+
+Strict output format:
+{"desease":["<disease name 1>","<disease name 2>"]}
+
+VALID EXAMPLES (ONLY RETURN THE JSON, NO EXTRA TEXT):
+
+{"desease":["breast cancer"]}
+
+{"desease":["prostate cancer"]}
+
+{"desease":["lung cancer"]}
+
+{"desease":["colorectal cancer"]}
+
+{"desease":["type 2 diabetes mellitus"]}
+
+{"desease":["hypertension"]}
+
+{"desease":["alzheimer disease"]}
+
+{"desease":["coronary artery disease"]}
+
+{"desease":["chronic obstructive pulmonary disease"]}
+
+{"desease":["asthma"]}
+
+{"desease":["rheumatoid arthritis"]}
+
+{"desease":["parkinson disease"]}
+
+{"desease":["multiple sclerosis"]}
+
+{"desease":["chronic kidney disease"]}
+
+{"desease":["breast cancer","lung cancer"]}
+
+{"desease":["type 2 diabetes mellitus","hypertension"]}
+
+If the input is ambiguous, return the most likely disease name(s)
+that follow Open Targets Platform naming conventions.
+
+"""
         }
-
-        user_prompt_content = user_text
-
-        # If a file_path is provided, read and encode its contents
-        if file_path is not None and os.path.isfile(file_path):
-            with open(file_path, "rb") as file:
-                encoded_data = base64.b64encode(file.read()).decode("ascii")
-            user_prompt_content += f"\n[File content in base64: {encoded_data}]"
-
-        # Create the prompt array (system + user)
         chat_prompt = [
             self.system_prompt,
             {
                 "role": "user",
-                "content": user_prompt_content
+                "content": user_text
             }
         ]
 
-        # Request completion from Azure OpenAI
         completion = self.client.chat.completions.create(
-            max_tokens=8000,  
+            max_tokens=2000,  
             temperature=0.1,  
             top_p=0.21,  
             frequency_penalty=0.02,  
