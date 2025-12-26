@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes.text import router as text_router
+from routes.drugs import router as text_router
 
 app = FastAPI(title="Pindora Shield API",description="Drug discovery and molecule generation API",version="1.0.0")
 
