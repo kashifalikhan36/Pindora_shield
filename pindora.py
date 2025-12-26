@@ -2,6 +2,9 @@ from Tengan.generate_from_smiles import MoleculeGenerator
 from fetch_data import FetchData
 from copilot import AzureOpenAIChatClient
 import json
+from rdkit import Chem
+from rdkit.Chem import Descriptors, Crippen, AllChem
+from rdkit import DataStructs
 
 data_processor = FetchData()
 copilot=AzureOpenAIChatClient()
@@ -63,13 +66,79 @@ for disease_name in diseases:
 
 print(f"Total records collected: {len(all_data)}")
 
-gen_mol=[]
-for i in all_data:
-    input_smiles=i["smiles"]
-    results = generator.generate_from_smiles(input_smiles, 5)
-    gen_mol.append({"input_smile": input_smiles, "generated_smiles": results})
-    for j, smiles in enumerate(results, 1):
-        print(f"Input SMILES: {input_smiles} -> Generated {j}. {smiles}")
+def split_smiles_components(smiles: str) -> list:
+    if not smiles or not isinstance(smiles, str):
+        return []
+    
+    if '$' in smiles:
+        components = smiles.split('$')
+    else:
+        components = [smiles]
+    
+    cleaned = [c.strip() for c in components if c.strip() and len(c.strip()) > 1]
+    return cleaned if cleaned else [smiles.strip()]
 
-with open("generated_molecules.json", "w", encoding="utf-8") as f:
+def calculate_similarity(smiles1: str, smiles2: str) -> float:
+    try:
+        mol1 = Chem.MolFromSmiles(smiles1)
+        mol2 = Chem.MolFromSmiles(smiles2)
+        if mol1 and mol2:
+            fp1 = AllChem.GetMorganFingerprintAsBitVect(mol1, 2)
+            fp2 = AllChem.GetMorganFingerprintAsBitVect(mol2, 2)
+            return DataStructs.TanimotoSimilarity(fp1, fp2)
+    except:
+        pass
+    return 0.0
+
+def get_molecular_properties(smiles: str) -> dict:
+    try:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol:
+            return {
+                "valid": True,
+                "molecular_weight": Descriptors.MolWt(mol),
+                "logp": Crippen.MolLogP(mol),
+                "hbd": Descriptors.NumHDonors(mol),
+                "hba": Descriptors.NumHAcceptors(mol),
+                "rotatable_bonds": Descriptors.NumRotatableBonds(mol),
+                "aromatic_rings": Descriptors.NumAromaticRings(mol)
+            }
+    except:
+        pass
+    return {"valid": False}
+
+gen_mol = []
+for i in all_data:
+    input_smiles = i["smiles"]
+    results = generator.generate_from_smiles(input_smiles, 5)
+    
+    generated_with_props = []
+    for result_smiles in results:
+        components = split_smiles_components(result_smiles)
+        component_data = []
+        
+        for component in components:
+            props = get_molecular_properties(component)
+            similarity = calculate_similarity(input_smiles, component)
+            component_data.append({
+                "smiles": component,
+                "similarity": round(similarity, 3),
+                "properties": props
+            })
+        
+        generated_with_props.append(components)
+    
+    gen_mol.append({
+        "input_smile": input_smiles,
+        "disease_name": i["disease_name"],
+        "target_symbol": i["target_symbol"],
+        "drug_name": i["drug_name"],
+        "generated_molecules": generated_with_props
+    })
+    
+    print(f"\nInput: {input_smiles} (Drug: {i['drug_name']})")
+    for j, components in enumerate(generated_with_props, 1):
+        print(f"  Generated {j}: {components}")
+
+with open("generated_molecules_new.json", "w", encoding="utf-8") as f:
     json.dump(gen_mol, f, indent=2)
