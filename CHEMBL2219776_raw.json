@@ -1,0 +1,67 @@
+{
+  "atc_classifications": [],
+  "availability_type": null,
+  "biotherapeutic": null,
+  "black_box_warning": 0,
+  "chemical_probe": 0,
+  "chirality": 1,
+  "cross_references": [],
+  "dosed_ingredient": false,
+  "first_approval": null,
+  "first_in_class": 0,
+  "helm_notation": null,
+  "inorganic_flag": 0,
+  "max_phase": "2.0",
+  "molecule_chembl_id": "CHEMBL2219776",
+  "molecule_hierarchy": {
+    "active_chembl_id": "CHEMBL2219776",
+    "molecule_chembl_id": "CHEMBL2219776",
+    "parent_chembl_id": "CHEMBL2219776"
+  },
+  "molecule_properties": null,
+  "molecule_structures": null,
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Cenersen sodium",
+      "syn_type": "OTHER",
+      "synonyms": "CENERSEN SODIUM"
+    },
+    {
+      "molecule_synonym": "Cenersen sodium",
+      "syn_type": "USAN",
+      "synonyms": "CENERSEN SODIUM"
+    },
+    {
+      "molecule_synonym": "EL-625",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "EL-625"
+    },
+    {
+      "molecule_synonym": "EL625",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "EL625"
+    },
+    {
+      "molecule_synonym": "OL(1)P53",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "OL(1)P53"
+    }
+  ],
+  "molecule_type": "Oligonucleotide",
+  "natural_product": 0,
+  "oral": false,
+  "orphan": 0,
+  "parenteral": false,
+  "polymer_flag": 0,
+  "pref_name": "CENERSEN SODIUM",
+  "prodrug": 0,
+  "structure_type": "NONE",
+  "therapeutic_flag": false,
+  "topical": false,
+  "usan_stem": "-rsen",
+  "usan_stem_definition": "antisense oligonucleotides: neurologic indications",
+  "usan_substem": "-rsen (-nersen)",
+  "usan_year": 2005,
+  "veterinary": 0,
+  "withdrawn_flag": false
+}

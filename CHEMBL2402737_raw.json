@@ -1,0 +1,107 @@
+{
+  "atc_classifications": [],
+  "availability_type": null,
+  "biotherapeutic": null,
+  "black_box_warning": 0,
+  "chemical_probe": 1,
+  "chirality": 1,
+  "cross_references": [],
+  "dosed_ingredient": false,
+  "first_approval": null,
+  "first_in_class": 0,
+  "helm_notation": null,
+  "inorganic_flag": 0,
+  "max_phase": "3.0",
+  "molecule_chembl_id": "CHEMBL2402737",
+  "molecule_hierarchy": {
+    "active_chembl_id": "CHEMBL2402737",
+    "molecule_chembl_id": "CHEMBL2402737",
+    "parent_chembl_id": "CHEMBL2402737"
+  },
+  "molecule_properties": {
+    "alogp": "6.94",
+    "aromatic_rings": 3,
+    "full_molformula": "C31H29Cl2F2N3O4",
+    "full_mwt": "616.49",
+    "hba": 5,
+    "hbd": 3,
+    "heavy_atoms": 42,
+    "mw_freebase": "616.49",
+    "np_likeness_score": "-0.74",
+    "num_ro5_violations": 2,
+    "psa": "111.45",
+    "qed_weighted": "0.27",
+    "ro3_pass": "N",
+    "rtb": 7
+  },
+  "molecule_structures": {
+    "canonical_smiles": "COc1cc(C(=O)O)ccc1NC(=O)[C@@H]1N[C@@H](CC(C)(C)C)[C@](C#N)(c2ccc(Cl)cc2F)[C@H]1c1cccc(Cl)c1F",
+    "molfile": "\n     RDKit          2D\n\n 42 45  0  0  0  0  0  0  0  0999 V2000\n  -12.1982    3.7955    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n  -12.8656    3.3106    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -12.6107    2.5260    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -11.7857    2.5260    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -11.5308    3.3106    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -10.7462    3.5655    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -10.5746    4.3725    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n  -10.1331    3.0135    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -9.7900    4.6274    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -9.1769    4.0754    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -8.3923    4.3303    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -8.2208    5.1373    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -8.8338    5.6894    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -9.6185    5.4344    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -9.3484    3.2684    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -8.7651    2.6850    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -7.4361    5.3922    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -7.2646    6.1992    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.8230    4.8402    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n  -13.6503    3.5655    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -13.8638    4.3624    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -14.6607    4.5759    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -13.2804    4.9458    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -14.0773    5.1593    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -13.0956    1.8586    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -13.4076    2.7395    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -14.2045    2.9531    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n  -13.9161    1.9448    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -14.4011    1.2774    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -14.0655    0.5237    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -13.2450    0.4374    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -12.7601    1.1049    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -11.3008    1.8586    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -11.6364    1.1049    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -11.1514    0.4374    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -10.3309    0.5237    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -9.9954    1.2774    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -10.4803    1.9448    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  -10.1447    2.6985    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n   -9.1749    1.3636    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n  -11.9396    1.0187    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n  -14.5504   -0.1437    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  1  5  1  0\n  2  3  1  0\n  3  4  1  0\n  4  5  1  0\n  5  6  1  1\n  6  7  1  0\n  6  8  2  0\n  7  9  1  0\n  9 10  1  0\n  9 14  2  0\n 10 11  2  0\n 11 12  1  0\n 12 13  2  0\n 13 14  1  0\n 10 15  1  0\n 15 16  1  0\n 12 17  1  0\n 17 18  2  0\n 17 19  1  0\n  2 20  1  6\n 20 21  1  0\n 21 22  1  0\n 21 23  1  0\n 21 24  1  0\n  3 25  1  0\n  3 26  1  6\n 26 27  3  0\n 25 28  1  0\n 25 32  2  0\n 28 29  2  0\n 29 30  1  0\n 30 31  2  0\n 31 32  1  0\n  4 33  1  6\n 33 34  1  0\n 33 38  2  0\n 34 35  2  0\n 35 36  1  0\n 36 37  2  0\n 37 38  1  0\n 38 39  1  0\n 37 40  1  0\n 32 41  1  0\n 30 42  1  0\nM  END\n> <chembl_id>\nCHEMBL2402737\n\n> <chembl_pref_name>\nIDASANUTLIN",
+    "standard_inchi": "InChI=1S/C31H29Cl2F2N3O4/c1-30(2,3)14-24-31(15-36,19-10-9-17(32)13-21(19)34)25(18-6-5-7-20(33)26(18)35)27(38-24)28(39)37-22-11-8-16(29(40)41)12-23(22)42-4/h5-13,24-25,27,38H,14H2,1-4H3,(H,37,39)(H,40,41)/t24-,25-,27+,31-/m0/s1",
+    "standard_inchi_key": "TVTXCJFHQKSQQM-LJQIRTBHSA-N"
+  },
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Idasanutlin",
+      "syn_type": "INN",
+      "synonyms": "IDASANUTLIN"
+    },
+    {
+      "molecule_synonym": "Idasanutlin",
+      "syn_type": "OTHER",
+      "synonyms": "IDASANUTLIN"
+    },
+    {
+      "molecule_synonym": "Idasanutlin",
+      "syn_type": "USAN",
+      "synonyms": "IDASANUTLIN"
+    },
+    {
+      "molecule_synonym": "Idasanutlina",
+      "syn_type": "INN_SPANISH",
+      "synonyms": "IDASANUTLINA"
+    },
+    {
+      "molecule_synonym": "Idasanutline",
+      "syn_type": "INN_FRENCH",
+      "synonyms": "IDASANUTLINE"
+    },
+    {
+      "molecule_synonym": "RG-7388",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "RG-7388"
+    },
+    {
+      "molecule_synonym": "RG7388",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "RG7388"
+    },
+    {
+      "molecule_synonym": "RO-5503781",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "RO-5503781"
+    },
+    {
+      "molecule_synonym": "RO5503781",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "RO5503781"
+    }
+  ],
+  "molecule_type": "Small molecule",
+  "natural_product": 0,
+  "oral": false,
+  "orphan": 0,
+  "parenteral": false,
+  "polymer_flag": 0,
+  "pref_name": "IDASANUTLIN",
+  "prodrug": 0,
+  "structure_type": "MOL",
+  "therapeutic_flag": false,
+  "topical": false,
+  "usan_stem": null,
+  "usan_stem_definition": null,
+  "usan_substem": null,
+  "usan_year": 2015,
+  "veterinary": 0,
+  "withdrawn_flag": false
+}

@@ -1,0 +1,140 @@
+{
+  "atc_classifications": [
+    "L02BB04"
+  ],
+  "availability_type": 1,
+  "biotherapeutic": null,
+  "black_box_warning": 0,
+  "chemical_probe": 0,
+  "chirality": 2,
+  "cross_references": [
+    {
+      "xref_id": "enzalutamide",
+      "xref_name": "enzalutamide",
+      "xref_src": "DailyMed"
+    },
+    {
+      "xref_id": "human/EPAR/xtandi",
+      "xref_name": "xtandi",
+      "xref_src": "EMA"
+    }
+  ],
+  "dosed_ingredient": true,
+  "first_approval": 2012,
+  "first_in_class": 0,
+  "helm_notation": null,
+  "inorganic_flag": 0,
+  "max_phase": "4.0",
+  "molecule_chembl_id": "CHEMBL1082407",
+  "molecule_hierarchy": {
+    "active_chembl_id": "CHEMBL1082407",
+    "molecule_chembl_id": "CHEMBL1082407",
+    "parent_chembl_id": "CHEMBL1082407"
+  },
+  "molecule_properties": {
+    "alogp": "3.99",
+    "aromatic_rings": 2,
+    "full_molformula": "C21H16F4N4O2S",
+    "full_mwt": "464.44",
+    "hba": 4,
+    "hbd": 1,
+    "heavy_atoms": 32,
+    "mw_freebase": "464.44",
+    "np_likeness_score": "-1.50",
+    "num_ro5_violations": 0,
+    "psa": "76.44",
+    "qed_weighted": "0.55",
+    "ro3_pass": "N",
+    "rtb": 3
+  },
+  "molecule_structures": {
+    "canonical_smiles": "CNC(=O)c1ccc(N2C(=S)N(c3ccc(C#N)c(C(F)(F)F)c3)C(=O)C2(C)C)cc1F",
+    "molfile": "\n     RDKit          2D\n\n 32 34  0  0  0  0  0  0  0  0999 V2000\n   10.5706   -0.9894    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   10.1539   -1.7018    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   11.2829   -1.4059    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    7.6805    1.3914    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    7.6793    0.5642    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    8.3940    0.1514    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    9.1103    0.5647    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    9.1074    1.3950    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    8.3922    1.8041    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    6.9649    1.8095    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    6.2505    2.2217    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    6.9646    0.1524    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    6.2507    0.5653    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n    6.9640   -0.6725    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n    6.7518    0.9492    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n    9.7778    0.0878    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    9.7851   -0.7371    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   11.0508   -0.3134    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   10.5601    0.3495    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    9.1221   -1.2278    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   10.8079    1.1362    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0\n   11.8745   -0.3044    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   12.2945   -1.0167    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   13.1193   -1.0082    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   13.5253   -0.2882    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   13.1004    0.4246    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   12.2770    0.4127    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   14.3502   -0.2783    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   14.7540    0.4409    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n   14.7711   -0.9876    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n   14.3673   -1.7069    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   13.5027    1.1448    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n 10 11  3  0\n  4 10  1  0\n 17  1  1  0\n  1 18  1  0\n 18 19  1  0\n 19 16  1  0\n  7 16  1  0\n 17 20  2  0\n  5 12  1  0\n 19 21  2  0\n 18 22  1  0\n  7  8  1  0\n 12 13  1  0\n 22 23  2  0\n  5  6  1  0\n 23 24  1  0\n 12 14  1  0\n 24 25  2  0\n  8  9  2  0\n 25 26  1  0\n 12 15  1  0\n 26 27  2  0\n 27 22  1  0\n 16 17  1  0\n  9  4  1  0\n  1  2  1  0\n 25 28  1  0\n 28 29  2  0\n  3  1  1  0\n 28 30  1  0\n  4  5  2  0\n 30 31  1  0\n  6  7  2  0\n 26 32  1  0\nM  END\n> <chembl_id>\nCHEMBL1082407\n\n> <chembl_pref_name>\nENZALUTAMIDE",
+    "standard_inchi": "InChI=1S/C21H16F4N4O2S/c1-20(2)18(31)28(12-5-4-11(10-26)15(8-12)21(23,24)25)19(32)29(20)13-6-7-14(16(22)9-13)17(30)27-3/h4-9H,1-3H3,(H,27,30)",
+    "standard_inchi_key": "WXCXUHSOUPDCQV-UHFFFAOYSA-N"
+  },
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Enzalutamida",
+      "syn_type": "INN_SPANISH",
+      "synonyms": "ENZALUTAMIDA"
+    },
+    {
+      "molecule_synonym": "Enzalutamide",
+      "syn_type": "ATC",
+      "synonyms": "ENZALUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Enzalutamide",
+      "syn_type": "BNF",
+      "synonyms": "ENZALUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Enzalutamide",
+      "syn_type": "EMA",
+      "synonyms": "ENZALUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Enzalutamide",
+      "syn_type": "FDA",
+      "synonyms": "ENZALUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Enzalutamide",
+      "syn_type": "INN",
+      "synonyms": "ENZALUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Enzalutamide",
+      "syn_type": "MERCK_INDEX",
+      "synonyms": "ENZALUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Enzalutamide",
+      "syn_type": "OTHER",
+      "synonyms": "ENZALUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Enzalutamide",
+      "syn_type": "USAN",
+      "synonyms": "ENZALUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Mdv 3100",
+      "syn_type": "OTHER",
+      "synonyms": "MDV 3100"
+    },
+    {
+      "molecule_synonym": "MDV-3100",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "MDV-3100"
+    },
+    {
+      "molecule_synonym": "MDV3100",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "MDV3100"
+    },
+    {
+      "molecule_synonym": "Xtandi",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "XTANDI"
+    }
+  ],
+  "molecule_type": "Small molecule",
+  "natural_product": 0,
+  "oral": true,
+  "orphan": 0,
+  "parenteral": false,
+  "polymer_flag": 0,
+  "pref_name": "ENZALUTAMIDE",
+  "prodrug": 0,
+  "structure_type": "MOL",
+  "therapeutic_flag": true,
+  "topical": false,
+  "usan_stem": "-lutamide",
+  "usan_stem_definition": "deuterated compounds; non-steroid antiandrogens",
+  "usan_substem": "-lutamide",
+  "usan_year": 2012,
+  "veterinary": 0,
+  "withdrawn_flag": false
+}

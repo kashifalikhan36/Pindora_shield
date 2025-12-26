@@ -223,22 +223,35 @@ def get_ic50_data_for_molecule(molecule_chembl_id: str, limit: int = 1000) -> Li
 
 def get_molecule_properties(molecule_chembl_id: str) -> Dict[str, Any]:
     data = query_chembl(f"molecule/{molecule_chembl_id}")
-    molecule = data.get("molecule", {})
+    with open(f"{molecule_chembl_id}_raw.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
     
-    props = molecule.get("molecule_properties", {})
+    props = data.get("molecule_properties", {})
+    structs = data.get("molecule_structures", {})
+
     return {
-        "molecule_chembl_id": molecule_chembl_id,
-        "pref_name": molecule.get("pref_name"),
-        "full_mwt": props.get("full_mwt"),
+        "chembl_id": data.get("molecule_chembl_id"),
+        "max_phase": data.get("max_phase"),
+        "molecular_formula": props.get("full_molformula"),
+        "molecular_weight": props.get("full_mwt"),
         "alogp": props.get("alogp"),
+        "aromatic_rings": props.get("aromatic_rings"),
+        "mw_freebase" : props.get("mw_freebase"),
         "hba": props.get("hba"),
         "hbd": props.get("hbd"),
+        "heavy_atoms": props.get("heavy_atoms"),
+        "np_likeness_score": props.get("np_likeness_score"),
+        "num_ro5_violations": props.get("num_ro5_violations"),
         "psa": props.get("psa"),
+        "qed_weighted": props.get("qed_weighted"),
+        "ro3_pass": props.get("ro3_pass"),
         "rtb": props.get("rtb"),
-        "ro5_violations": props.get("num_ro5_violations"),
-        "qed_weighted": props.get("qed_weighted")
+        "smiles": structs.get("canonical_smiles"),
+        "inchi": structs.get("standard_inchi"),
+        "inchi_key": structs.get("standard_inchi_key"),
+        "molfile_preview": structs.get("molfile", "") if structs.get("molfile") else None
     }
-
+    
 
 # ============================
 # Main Pipeline
@@ -354,7 +367,6 @@ def get_data(diseases):
                     features = get_molecule_properties(drug["drug_id"])
                     for ic50 in ic50_data:
                         row = {
-                            # Disease information
                             "disease_name": disease_name,
                             "efo_id": i,
                             
@@ -375,6 +387,9 @@ def get_data(diseases):
                             "assay_chembl_id": ic50["assay_chembl_id"],
                             "pchembl_value": ic50["pchembl_value"]
                         }
+                        for key, value in features.items():
+                            if key != "molecule_chembl_id" and value is not None:
+                                row[key] = value
                         return row
 
-print(get_data(diseases))
+get_data(diseases)

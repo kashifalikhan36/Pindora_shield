@@ -1,0 +1,103 @@
+{
+  "atc_classifications": [],
+  "availability_type": null,
+  "biotherapeutic": null,
+  "black_box_warning": 0,
+  "chemical_probe": 0,
+  "chirality": 0,
+  "cross_references": [
+    {
+      "xref_id": "https://searchusan.ama-assn.org/finder/usan/search/EPRENETAPOPT/relevant/1/",
+      "xref_name": "EPRENETAPOPT",
+      "xref_src": "USAN"
+    }
+  ],
+  "dosed_ingredient": false,
+  "first_approval": null,
+  "first_in_class": 0,
+  "helm_notation": null,
+  "inorganic_flag": 0,
+  "max_phase": "3.0",
+  "molecule_chembl_id": "CHEMBL3186011",
+  "molecule_hierarchy": {
+    "active_chembl_id": "CHEMBL4802231",
+    "molecule_chembl_id": "CHEMBL3186011",
+    "parent_chembl_id": "CHEMBL3186011"
+  },
+  "molecule_properties": {
+    "alogp": "-0.34",
+    "aromatic_rings": 0,
+    "full_molformula": "C10H17NO3",
+    "full_mwt": "199.25",
+    "hba": 4,
+    "hbd": 1,
+    "heavy_atoms": 14,
+    "mw_freebase": "199.25",
+    "np_likeness_score": "0.95",
+    "num_ro5_violations": 0,
+    "psa": "49.77",
+    "qed_weighted": "0.68",
+    "ro3_pass": "N",
+    "rtb": 3
+  },
+  "molecule_structures": {
+    "canonical_smiles": "COCC1(CO)C(=O)C2CCN1CC2",
+    "molfile": "\n     RDKit          2D\n\n 14 15  0  0  0  0  0  0  0  0999 V2000\n   -0.6188   -0.0405    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0957   -0.4530    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0957   -1.2780    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.6188   -1.6905    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9600   -1.1753    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9600   -0.5566    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3332   -0.4530    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3332   -1.2780    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8102   -1.6905    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5082    0.2615    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0957    0.9760    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5082    1.6905    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.9207   -0.4530    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3332    0.2615    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  3  4  1  0\n  4  5  1  0\n  5  6  1  0\n  7  8  1  0\n  1  6  1  0\n  1  7  1  0\n  8  4  1  0\n  3  9  2  0\n 11 12  1  0\n 10 11  1  0\n  2 10  1  0\n 13 14  1  0\n  2 13  1  0\nM  END\n> <chembl_id>\nCHEMBL3186011\n\n> <chembl_pref_name>\nEPRENETAPOPT",
+    "standard_inchi": "InChI=1S/C10H17NO3/c1-14-7-10(6-12)9(13)8-2-4-11(10)5-3-8/h8,12H,2-7H2,1H3",
+    "standard_inchi_key": "BGBNULCRKBVAKL-UHFFFAOYSA-N"
+  },
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Apr 246",
+      "syn_type": "OTHER",
+      "synonyms": "APR 246"
+    },
+    {
+      "molecule_synonym": "Apr-246",
+      "syn_type": "OTHER",
+      "synonyms": "APR-246"
+    },
+    {
+      "molecule_synonym": "APR-246",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "APR-246"
+    },
+    {
+      "molecule_synonym": "Eprenetapopt",
+      "syn_type": "INN",
+      "synonyms": "EPRENETAPOPT"
+    },
+    {
+      "molecule_synonym": "Eprenetapopt",
+      "syn_type": "OTHER",
+      "synonyms": "EPRENETAPOPT"
+    },
+    {
+      "molecule_synonym": "Eprenetapopt",
+      "syn_type": "USAN",
+      "synonyms": "EPRENETAPOPT"
+    },
+    {
+      "molecule_synonym": "PRIMA-1Met",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "PRIMA-1Met"
+    }
+  ],
+  "molecule_type": "Small molecule",
+  "natural_product": 1,
+  "oral": false,
+  "orphan": 0,
+  "parenteral": false,
+  "polymer_flag": 0,
+  "pref_name": "EPRENETAPOPT",
+  "prodrug": 1,
+  "structure_type": "MOL",
+  "therapeutic_flag": false,
+  "topical": false,
+  "usan_stem": null,
+  "usan_stem_definition": null,
+  "usan_substem": null,
+  "usan_year": 2021,
+  "veterinary": 0,
+  "withdrawn_flag": false
+}

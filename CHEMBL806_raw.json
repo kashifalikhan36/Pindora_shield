@@ -1,0 +1,160 @@
+{
+  "atc_classifications": [
+    "L02BB01"
+  ],
+  "availability_type": 1,
+  "biotherapeutic": null,
+  "black_box_warning": 1,
+  "chemical_probe": 0,
+  "chirality": 2,
+  "cross_references": [
+    {
+      "xref_id": "flutamide",
+      "xref_name": "flutamide",
+      "xref_src": "DailyMed"
+    }
+  ],
+  "dosed_ingredient": true,
+  "first_approval": 1989,
+  "first_in_class": 0,
+  "helm_notation": null,
+  "inorganic_flag": 0,
+  "max_phase": "4.0",
+  "molecule_chembl_id": "CHEMBL806",
+  "molecule_hierarchy": {
+    "active_chembl_id": "CHEMBL491",
+    "molecule_chembl_id": "CHEMBL806",
+    "parent_chembl_id": "CHEMBL806"
+  },
+  "molecule_properties": {
+    "alogp": "3.21",
+    "aromatic_rings": 1,
+    "full_molformula": "C11H11F3N2O3",
+    "full_mwt": "276.21",
+    "hba": 3,
+    "hbd": 1,
+    "heavy_atoms": 19,
+    "mw_freebase": "276.21",
+    "np_likeness_score": "-1.76",
+    "num_ro5_violations": 0,
+    "psa": "72.24",
+    "qed_weighted": "0.68",
+    "ro3_pass": "N",
+    "rtb": 3
+  },
+  "molecule_structures": {
+    "canonical_smiles": "CC(C)C(=O)Nc1ccc([N+](=O)[O-])c(C(F)(F)F)c1",
+    "molfile": "\n     RDKit          2D\n\n 19 19  0  0  0  0  0  0  0  0999 V2000\n    6.2000   -4.4792    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    6.8167   -5.5250    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    6.8167   -4.1292    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    6.2000   -5.1792    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    3.7500   -4.4792    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    4.3542   -4.1292    0.0000 N   0  0  0  0  0  0  0  0  0  0  0  0\n    5.5917   -4.1125    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    5.5917   -5.5417    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    7.4375   -5.1625    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    6.8167   -6.2375    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    4.9750   -4.4792    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    3.7500   -5.1792    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0\n    7.1917   -3.5167    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n    7.4375   -4.4792    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n    6.4542   -3.5167    0.0000 F   0  0  0  0  0  0  0  0  0  0  0  0\n    3.1292   -4.1292    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    4.9750   -5.1792    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.5167   -4.4792    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n    3.1250   -3.4167    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0\n  2  4  1  0\n  3  1  1  0\n  4  1  1  0\n  5  6  1  0\n  6 11  1  0\n  7  1  2  0\n  8  4  2  0\n  9  2  1  0\n 10  2  2  0\n 11  7  1  0\n 12  5  2  0\n 13  3  1  0\n 14  3  1  0\n 15  3  1  0\n 16  5  1  0\n 17 11  2  0\n 18 16  1  0\n 19 16  1  0\n 17  8  1  0\nM  CHG  2   2   1   9  -1\nM  END\n> <chembl_id>\nCHEMBL806\n\n> <chembl_pref_name>\nFLUTAMIDE",
+    "standard_inchi": "InChI=1S/C11H11F3N2O3/c1-6(2)10(17)15-7-3-4-9(16(18)19)8(5-7)11(12,13)14/h3-6H,1-2H3,(H,15,17)",
+    "standard_inchi_key": "MKXKFYHWDHIYRV-UHFFFAOYSA-N"
+  },
+  "molecule_synonyms": [
+    {
+      "molecule_synonym": "Chimax",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "CHIMAX"
+    },
+    {
+      "molecule_synonym": "Drogenil",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "DROGENIL"
+    },
+    {
+      "molecule_synonym": "Eulexin",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "EULEXIN"
+    },
+    {
+      "molecule_synonym": "Flutamida",
+      "syn_type": "INN_SPANISH",
+      "synonyms": "FLUTAMIDA"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "ATC",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "BAN",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "BNF",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "FDA",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "INN",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "JAN",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "MERCK_INDEX",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "OTHER",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "TRADE_NAME",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "USAN",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "Flutamide",
+      "syn_type": "USP",
+      "synonyms": "FLUTAMIDE"
+    },
+    {
+      "molecule_synonym": "NSC-215876",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "NSC-215876"
+    },
+    {
+      "molecule_synonym": "SCH 13521",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "SCH 13521"
+    },
+    {
+      "molecule_synonym": "SCH-13521",
+      "syn_type": "RESEARCH_CODE",
+      "synonyms": "SCH-13521"
+    }
+  ],
+  "molecule_type": "Small molecule",
+  "natural_product": 0,
+  "oral": true,
+  "orphan": 0,
+  "parenteral": false,
+  "polymer_flag": 0,
+  "pref_name": "FLUTAMIDE",
+  "prodrug": 1,
+  "structure_type": "MOL",
+  "therapeutic_flag": true,
+  "topical": false,
+  "usan_stem": "-lutamide",
+  "usan_stem_definition": "non-steroid antiandrogens",
+  "usan_substem": "-lutamide",
+  "usan_year": 1975,
+  "veterinary": 0,
+  "withdrawn_flag": false
+}
