@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from models.schemas import TextInput, TextResponse, HealthCheck
 from pindora import Pindora
-from util.generate_3d import generate_3d_from_smiles
+from utils.generate_3d import Molecule3DGenerator
 import json
 
 router = APIRouter(
@@ -26,16 +26,15 @@ async def process_text(request: TextInput):
         "status": "success",
     }
 
-# ✅ NEW 3D MODEL ENDPOINT
 @router.post("/generate-3d")
 async def generate_3d_endpoint(request: dict):
     smiles = request.get("input_smile")
-
     if not smiles:
         raise HTTPException(status_code=400, detail="SMILES string is required")
 
     try:
-        path = generate_3d_from_smiles(smiles)
+        generator = Molecule3DGenerator()
+        path = generator._generate_3d(smiles)
         return {
             "message": "3D model generated successfully",
             "file_path": path,
