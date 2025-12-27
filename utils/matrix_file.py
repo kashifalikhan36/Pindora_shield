@@ -1,96 +1,110 @@
-import os
 import joblib
-import pandas as pd
+import numpy as np
+from pathlib import Path
+
+try:
+    from rdkit import Chem
+    from rdkit.Chem import rdFingerprintGenerator
+except Exception as e:
+    raise ImportError("RDKit is required for matrix_file. Install rdkit and try again.") from e
+
+from typing import Any, Dict, Optional
 
 
-class PindoraShield:
-    """
-    PindoraShield
-    -------------
-    Unified inference engine for molecular prediction models.
+class MatrixPredictor:
 
-    Loaded models:
-    - IC50 regression
-    - Association score regression
-    - max phase  classifier
-    - pChEMBL baseline regression
-    - Target symbol classifier (exploratory)
-    """
+    def __init__(self, model_dir: Optional[str | Path] = None):
+        self.model_dir = Path(model_dir) if model_dir else Path(__file__).parent
+        self.ic50_bundle = self._load_bundle("catboost_ic50.pkl")
+        self.assoc_bundle = self._load_bundle("catboost_association.pkl")
+        self.phase_bundle = self._load_bundle("catboost_max_phase.pkl")
+        self.target_bundle = self._load_bundle("catboost_target.pkl")
 
-    def __init__(self, model_dir: str = "matriX_model"):
-        self.model_dir = model_dir
-        self._validate_model_dir()
-        self._load_models()
+        self.radius = self.ic50_bundle["radius"]
+        self.fp_size = self.ic50_bundle["fp_size"]
+        self.morgan_gen = rdFingerprintGenerator.GetMorganGenerator(
+            radius=self.radius,
+            fpSize=self.fp_size
+        )
 
-    # -----------------------
-    # Setup
-    # -----------------------
-    def _validate_model_dir(self):
-        if not os.path.isdir(self.model_dir):
+    def _load_bundle(self, filename: str) -> Dict[str, Any]:
+        path = self.model_dir / filename
+        if not path.exists():
             raise FileNotFoundError(
-                f"Model directory not found: {self.model_dir}"
+                f"Required model bundle not found: {path}. Pass the correct model_dir to MatrixPredictor() or place the bundle in this directory."
             )
+        return joblib.load(path)
 
-    def _load_models(self):
-        self.ic50_model = joblib.load(
-            os.path.join(self.model_dir, "ic50_catboost.pkl")
-        )
-        self.assoc_model = joblib.load(
-            os.path.join(self.model_dir, "association_catboost.pkl")
-        )
-        self.phase_model = joblib.load(
-            os.path.join(self.model_dir, "maxphase_cb.pkl")
-        )
-        self.pchembl_model = joblib.load(
-            os.path.join(self.model_dir, "pchembl_cb.pkl")
-        )
-        self.target_model = joblib.load(
-            os.path.join(self.model_dir, "trget_symbol.pkl")
-        )
+    def smiles_to_fp(self, smiles: str) -> np.ndarray:
+        """Convert SMILES to fingerprint array using the configured Morgan generator."""
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is None:
+            raise ValueError("Invalid SMILES")
 
-    # -----------------------
-    # Core predictions
-    # -----------------------
-    def predict_ic50(self, X: pd.DataFrame):
-        return self.ic50_model.predict(X)
+        fp = self.morgan_gen.GetFingerprint(mol)
+        return np.array(fp).reshape(1, -1)
 
-    def predict_association(self, X: pd.DataFrame):
-        return self.assoc_model.predict(X)
+    def predict_ic50(self, smiles: str) -> Dict[str, float]:
+        X = self.smiles_to_fp(smiles)
+        log_ic50 = self.ic50_bundle["model"].predict(X)[0]
+        ic50 = 10 ** log_ic50
+        return {"IC50": float(ic50), "log10_IC50": float(log_ic50)}
 
-    def predict_phase_probability(self, X: pd.DataFrame):
-        return self.phase_model.predict_proba(X)[:, 1]
+    def predict_association(self, smiles: str) -> Dict[str, float]:
+        X = self.smiles_to_fp(smiles)
+        log_assoc = self.assoc_bundle["model"].predict(X)[0]
+        assoc = 10 ** log_assoc
+        return {"Association_Score": float(assoc), "log10_Association": float(log_assoc)}
 
-    def predict_pchembl(self, X: pd.DataFrame):
-        return self.pchembl_model.predict(X)
+    def predict_phase(self, smiles: str) -> int:
+        X = self.smiles_to_fp(smiles)
+        max_phase = self.phase_bundle["model"].predict(X)[0]
+        return int(max_phase)
 
-    def predict_target(self, X: pd.DataFrame):
-        return self.target_model.predict(X)
+    def predict_target(self, smiles: str) -> str:
+        X = self.smiles_to_fp(smiles)
+        target_idx = self.target_bundle["model"].predict(X)[0]
+        target_symbol = self.target_bundle["label_encoder"].inverse_transform([int(target_idx)])[0]
+        return str(target_symbol)
 
-    # -----------------------
-    # Unified inference
-    # -----------------------
-    def predict_all(self, X: pd.DataFrame):
-        """
-        Run all models and return predictions.
-        """
+    def predict_all(self, smiles: str) -> Dict[str, Any]:
+        """Run all predictions and return a consolidated dictionary (same shape as previous module-level version)."""
+        X = self.smiles_to_fp(smiles)
+
+        log_ic50 = self.ic50_bundle["model"].predict(X)[0]
+        ic50 = 10 ** log_ic50
+
+        log_assoc = self.assoc_bundle["model"].predict(X)[0]
+        assoc = 10 ** log_assoc
+
+        max_phase = self.phase_bundle["model"].predict(X)[0]
+
+        target_idx = self.target_bundle["model"].predict(X)[0]
+        target_symbol = self.target_bundle["label_encoder"].inverse_transform([int(target_idx)])[0]
+
         return {
-            "log_ic50": self.predict_ic50(X),
-            "association_score": self.predict_association(X),
-            "phase4_probability": self.predict_phase_probability(X),
-            "pchembl": self.predict_pchembl(X),
-            "target_symbol": self.predict_target(X),
+            "IC50": float(ic50),
+            "Association_Score": float(assoc),
+            "Max_Clinical_Phase": int(max_phase),
+            "Predicted_Target": str(target_symbol)
         }
 
-    # -----------------------
-    # Sanity test
-    # -----------------------
-    def sanity_check(self, X: pd.DataFrame, n: int = 5):
-        """
-        Lightweight internal check to verify model loading and inference.
-        """
-        outputs = self.predict_all(X)
 
-        for key, values in outputs.items():
-            print(f"{key}: {values[:n]}")
+if __name__ == "__main__":
+    sample_smiles = "CC(=O)NC1=CC=C(O)C=C1"
 
-        return outputs
+    try:
+        predictor = MatrixPredictor()
+    except FileNotFoundError as exc:
+        print("Model files not found. Skipping predictions.")
+        print(str(exc))
+    else:
+        print("Running sample prediction for:", sample_smiles)
+        results = predictor.predict_all(sample_smiles)
+        for k, v in results.items():
+            print(f"{k}: {v}")
+
+        assert "IC50" in results and results["IC50"] >= 0
+        assert "Association_Score" in results
+        assert "Predicted_Target" in results
+        print("Sample prediction completed successfully.")
