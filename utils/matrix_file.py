@@ -8,12 +8,25 @@ try:
 except Exception as e:
     raise ImportError("RDKit is required for matrix_file. Install rdkit and try again.") from e
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 
 class MatrixPredictor:
+    """Class wrapper around the fingerprint generator and prediction models.
 
-    def __init__(self, model_dir: Optional[str | Path] = None):
+    Usage:
+        mp = MatrixPredictor(model_dir=None)  # defaults to directory of this file
+        results = mp.predict_all("CC(=O)NC1=CC=C(O)C=C1")
+
+    The class expects the following pickle files to be present in model_dir:
+      - catboost_ic50.pkl
+      - catboost_association.pkl
+      - catboost_max_phase.pkl
+      - catboost_target.pkl
+    Each bundle is expected to contain the same keys used previously (e.g., "radius", "fp_size", "model").
+    """
+
+    def __init__(self, model_dir: Optional[Union[str, Path]] = None):
         self.model_dir = Path(model_dir) if model_dir else Path(__file__).parent
         self.ic50_bundle = self._load_bundle("catboost_ic50.pkl")
         self.assoc_bundle = self._load_bundle("catboost_association.pkl")
@@ -95,16 +108,11 @@ if __name__ == "__main__":
 
     try:
         predictor = MatrixPredictor()
-    except FileNotFoundError as exc:
-        print("Model files not found. Skipping predictions.")
-        print(str(exc))
+    except FileNotFoundError:
+        pass
     else:
-        print("Running sample prediction for:", sample_smiles)
         results = predictor.predict_all(sample_smiles)
-        for k, v in results.items():
-            print(f"{k}: {v}")
-
         assert "IC50" in results and results["IC50"] >= 0
         assert "Association_Score" in results
         assert "Predicted_Target" in results
-        print("Sample prediction completed successfully.")
+
