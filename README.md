@@ -42,6 +42,7 @@ Step 2: Molecular Processing (SMILES Representation)
 Known molecules linked to identified targets are retrieved and represented using standardized SMILES strings, providing a consistent molecular format for downstream analysis.
 
 Step 3: De Novo Molecule Generation (TangGen)
+![TenGAN Overview](tengan_overview.png)
 Based on the disease and target context, a generative model (TangGen) is used to generate alternative candidate molecules.
 - Generates diverse and novel SMILES strings
 - Ensures chemical validity and structural diversity
