@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Drug Discovery – Minimal</title>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #020617;
+      color: #e5e7eb;
+      padding: 24px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: white;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      background: #38bdf8;
+      color: #020617;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    pre {
+      margin-top: 16px;
+      background: #020617;
+      border: 1px solid #1e293b;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      overflow-x: auto;
+    }
+    .card {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      background: #020617;
+    }
+
+    .card h3 {
+      margin: 0 0 6px 0;
+      font-size: 15px;
+    }
+
+    .meta {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 8px;
+    }
+
+    .props {
+      font-size: 12px;
+      line-height: 1.6;
+      background: #020617;
+      border: 1px solid #1e293b;
+      padding: 10px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Drug Discovery (Raw JSON)</h2>
+
+  <textarea id="prompt" placeholder="e.g. i have fever"></textarea>
+  <br />
+
+  <button id="runBtn">Run</button>
+
+  <div id="output"></div>
+
+  <script>
+    const API = "http://4.240.107.18/api/drug_discovery";
+
+    document.getElementById("runBtn").onclick = async () => {
+      const text = document.getElementById("prompt").value.trim();
+      if (!text) return;
+
+      const out = document.getElementById("output");
+      out.textContent = "Loading...";
+
+      try {
+        const res = await fetch(API, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            text: `(query(${text}))`
+          })
+        });
+
+        const json = await res.json();
+        renderResults(json);
+
+      } catch (e) {
+        out.textContent = "ERROR: " + e.message;
+      }
+    };
+
+    function renderResults(data) {
+      const out = document.getElementById("output");
+      out.innerHTML = "";
+
+      if (!Array.isArray(data.results)) {
+        out.textContent = "Unexpected response format";
+        return;
+      }
+
+      data.results.forEach((item, index) => {
+        const mol = item.generated_molecules?.[0]?.[0];
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+          <h3>${index + 1}. ${item.drug_name}</h3>
+          <div class="meta">
+            Disease: ${item.disease_name}<br/>
+            Target: ${item.target_symbol}<br/>
+            SMILES: ${mol?.smiles || "N/A"}
+          </div>
+          <div class="props">
+            Molecular Weight: ${mol?.properties?.molecular_weight}<br/>
+            LogP: ${mol?.properties?.logp}<br/>
+            HBD: ${mol?.properties?.hbd}<br/>
+            HBA: ${mol?.properties?.hba}<br/>
+            Rotatable Bonds: ${mol?.properties?.rotatable_bonds}<br/>
+            Aromatic Rings: ${mol?.properties?.aromatic_rings}
+          </div>
+        `;
+
+        out.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Bio Molecular Loader</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+    background: radial-gradient(circle at center, #07131a, #020509);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: system-ui, sans-serif;
+    color: #d9faff;
+  }
+
+  .loader {
+    text-align: center;
+  }
+
+  canvas {
+    width: 320px;
+    height: 320px;
+  }
+
+  .status {
+    margin-top: 14px;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    opacity: 0.85;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="loader">
+  <canvas id="canvas" width="320" height="320"></canvas>
+  <div class="status" id="status">Initializing cellular processes…</div>
+</div>
+
+<script>
+/* ===============================
+   Canvas Setup
+================================ */
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const statusText = document.getElementById("status");
+
+/* ===============================
+   Bio Configuration
+================================ */
+const MOLECULE_COUNT = 24;
+const INTERACTION_DISTANCE = 90;
+const BASE_SPEED = 0.6;
+
+/* ===============================
+   Molecules
+================================ */
+const molecules = [];
+
+for (let i = 0; i < MOLECULE_COUNT; i++) {
+  molecules.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: (Math.random() - 0.5) * BASE_SPEED,
+    vy: (Math.random() - 0.5) * BASE_SPEED,
+    r: 2.5 + Math.random() * 3,
+    phase: Math.random() * Math.PI * 2
+  });
+}
+
+/* ===============================
+   Draw Functions
+================================ */
+function drawMolecule(m) {
+  // Pulsing size (energy fluctuation)
+  const pulse = Math.sin(Date.now() * 0.003 + m.phase) * 0.6;
+
+  ctx.beginPath();
+  ctx.arc(m.x, m.y, m.r + pulse, 0, Math.PI * 2);
+  ctx.fillStyle = "#79e6ff";
+  ctx.shadowBlur = 12;
+  ctx.shadowColor = "#79e6ff";
+  ctx.fill();
+}
+
+function drawInteraction(a, b, d) {
+  ctx.strokeStyle = `rgba(121, 230, 255, ${1 - d / INTERACTION_DISTANCE})`;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(a.x, a.y);
+  ctx.lineTo(b.x, b.y);
+  ctx.stroke();
+}
+
+/* ===============================
+   Animation Loop
+================================ */
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  molecules.forEach((m, i) => {
+    // Brownian motion
+    m.vx += (Math.random() - 0.5) * 0.05;
+    m.vy += (Math.random() - 0.5) * 0.05;
+
+    m.x += m.vx;
+    m.y += m.vy;
+
+    // Containment (cell boundary)
+    if (m.x < 0 || m.x > canvas.width) m.vx *= -1;
+    if (m.y < 0 || m.y > canvas.height) m.vy *= -1;
+
+    // Interactions
+    for (let j = i + 1; j < molecules.length; j++) {
+      const o = molecules[j];
+      const dx = m.x - o.x;
+      const dy = m.y - o.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+
+      if (dist < INTERACTION_DISTANCE) {
+        drawInteraction(m, o, dist);
+      }
+    }
+
+    drawMolecule(m);
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+/* ===============================
+   API-Based Status Updates
+================================ */
+async function fetchStatus() {
+  try {
+    const id = Math.floor(Math.random() * 10) + 1;
+    const res = await fetch(
+      "https://jsonplaceholder.typicode.com/posts/" + id
+    );
+    const data = await res.json();
+
+    statusText.textContent =
+      "Cellular update: " + data.title;
+  } catch {
+    statusText.textContent =
+      "Monitoring biochemical activity…";
+  }
+}
+
+fetchStatus();
+setInterval(fetchStatus, 4500);
+</script>
+
+</body>
+</html>
