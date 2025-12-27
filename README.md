@@ -12,3 +12,6 @@ Existing computational tools for molecular generation and optimization often suf
 
 - Existing AI-based molecular generators such as VAE and early GAN models often struggle with mode collapse, limited novelty, or unstable training.
 ([-Royal Society of Chemistry](https://pubs.rsc.org/en/content/articlehtml/2025/dd/d5dd00170f))
+
+- Many recent transformer-based approaches demonstrate promising results in academic settings but lack validation, reproducibility, or integration into usable research workflows.
+([arxiv.org](https://arxiv.org/html/2503.12796v1))
