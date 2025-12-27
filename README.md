@@ -9,3 +9,6 @@ Existing computational tools for molecular generation and optimization often suf
 
 - Traditional drug discovery pipelines require years of experimentation and extensive trial-and-error, leading to high costs and delayed treatments.
 ([-DrugPaatentWatch](https://www.drugpatentwatch.com/blog/the-predictive-pipeline-structuring-drug-development-timelines-with-ai-driven-patent-intelligence))
+
+- Existing AI-based molecular generators such as VAE and early GAN models often struggle with mode collapse, limited novelty, or unstable training.
+([-Royal Society of Chemistry](https://pubs.rsc.org/en/content/articlehtml/2025/dd/d5dd00170f))
