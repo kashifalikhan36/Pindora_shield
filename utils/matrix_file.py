@@ -87,3 +87,5 @@ class MatrixPredictor:
             "Max_Clinical_Phase": int(phase),
             "Predicted_Target": str(target)
         }
+
+print(MatrixPredictor().predict_all("CC(=O)NC1=CC=C(O)C=C1"))
