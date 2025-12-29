@@ -30,7 +30,7 @@ The proposed system operates in four major stages:
 4 -> Comparative Evaluation & Optimization
 
 Each stage is designed to reduce manual intervention while ensuring chemical validity, diversity, and optimization across multiple drug-relevant properties.
-![Worlflow](image-1.png)
+![Worlflow](flow.png)
 ![wf](image-2.png)
 ## Work FLow 
 Pindora Shield follows a structured pipeline where disease-specific molecular candidates are generated and evaluated across multiple drug-relevant dimensions.
