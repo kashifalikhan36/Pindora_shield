@@ -1,4 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css";
+
+
 
 
 type Molecule = {
@@ -161,9 +167,16 @@ export default function ResultPage({ results }: { results: ResultItem[] }) {
                     {isMetricsLoading ? (
                       <div>Analyzing selected molecule…</div>
                     ) : metrics ? (
-                      <pre style={{ fontSize: "12px", whiteSpace: "pre-wrap" }}>
-                        {JSON.stringify(metrics, null, 2)}
-                      </pre>
+                      <div className="prose prose-invert max-w-none text-sm">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkMath]}
+                          rehypePlugins={[rehypeKatex]}
+                        >
+                          {metrics?.report}
+                        </ReactMarkdown>
+                      </div>
+
+
                     ) : null}
                   </div>
                 )}
